@@ -21,7 +21,7 @@ public class Day22_PozitiveLoginTest {
     C05_BlueRentalHomePage c05_blueRentalHomePage;
     C06_BlueRentalLoginPage c06_blueRentalLoginPage;
     @Test
-    public void US100201_Admin_Login(){
+    public void US100201_Admin_Login() throws InterruptedException {
 
         Driver.getDriver().get(ConfigReader.getProperty("bluerentacar_url"));
 
@@ -30,7 +30,9 @@ public class Day22_PozitiveLoginTest {
 
         c06_blueRentalLoginPage = new C06_BlueRentalLoginPage();
         c06_blueRentalLoginPage.emailTextBox.sendKeys(ConfigReader.getProperty("admin_email"));
+        Thread.sleep(5000);
         c06_blueRentalLoginPage.passwordTextBox.sendKeys(ConfigReader.getProperty("admin_password"));
+        Thread.sleep(5000);
         c06_blueRentalLoginPage.loginButton.click();                             //giriş yaptıktan sonra isim yerinin locate'ini aldık
         Assert.assertTrue(Driver.getDriver().findElement(By.xpath("//*[@id='dropdown-basic-button']")).isDisplayed());
     }

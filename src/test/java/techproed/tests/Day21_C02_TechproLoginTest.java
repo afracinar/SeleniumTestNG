@@ -10,7 +10,7 @@ import techproed.utilities.Driver;
 
 public class Day21_C02_TechproLoginTest {
 
-    @Test
+    @Test(groups = "regression-tests")
     public void techproEducationTest() throws InterruptedException {
 
         //adrese git
