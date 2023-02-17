@@ -4,11 +4,13 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.IOException;
+
 public class Listeners implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        System.out.println("onStart-Tum testlerden once bir kere cagrilir : " + context.getName());
+        System.out.println("onStart-Tum testlerden once bir kere cagrilir : " + context.getName()); //getName method isimlerini getiri bize.
     }
 
     @Override
@@ -30,10 +32,15 @@ public class Listeners implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         System.out.println("onTestFailure-Sadece FAIL olan testlerden SONRA tek bir kez cagrilir : " + result.getName());
+        try {
+            ReusableMethods.getScreenshot("Test Case-Fail : "+result.getName()); //test case fail olduğunda ekran görüntüsü aldırdık
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        System.out.println("onTestSkipped-Sadece skip edilen testlerden sonra tek bir kez cagrilir : " + result.getName());
+        System.out.println("onTestSkipped-Sadece skip edilen (atlanan) testlerden SONRA tek bir kez cagrilir : " + result.getName());
     }
 }
